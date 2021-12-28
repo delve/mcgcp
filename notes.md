@@ -68,10 +68,11 @@ mount /dev/disk/by-id/google-mc-1-world /home/minecraft
 cd /home/minecraft
 screen -d -m -S mcs java -Xms1G -Xmx7G -d64 -jar minecraft_server.1.18.jar nogui
 
-shgutdown-script
+shutdown-script
 #!/bin/bash
 sudo screen -r -X stuff '/stop\n'
 
 
 # CREATE cloud functions from script files & package (HOW?)
 https://cloud.google.com/sdk/gcloud/reference/functions/deploy
+deploy - https://codelabs.developers.google.com/codelabs/local-development-with-cloud-functions#5

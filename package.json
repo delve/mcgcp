@@ -1,6 +1,0 @@
-{
-    "dependencies": {
-      "@google-cloud/compute": "^3.0.0"
-    }
-  }
-  

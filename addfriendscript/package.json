@@ -3,7 +3,7 @@
     "@google-cloud/compute": "^3.0.0",
     "@google-cloud/functions-framework": "^2.1.0"
   },
-  "name": "functions",
+  "name": "addfriendscript",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {

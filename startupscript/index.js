@@ -20,17 +20,18 @@ exports.startInstance = async function startInstance(req, res) {
   // Start the VM
   const instancesClient = new compute.InstancesClient();
   console.log('about to start a VM');
-  const [response] = await instancesClient.start({
+  const response = await instancesClient.start({
     project: projectId,
     zone: zonename,
     instance: vmname,
   });
   console.log('the server is starting');
-  let operation = response.latestResponse;
+  console.log(response)
+  let operation = response[0].operationType;
   const operationsClient = new compute.ZoneOperationsClient();
-console.log(operation)
+
   // Wait for the operation to complete.
-  while (operation.status !== 'DONE') {
+  while (response[0].status !== 'DONE') {
     [operation] = await operationsClient.wait({
       operation: operation.name,
       project: projectId,
@@ -60,3 +61,17 @@ console.log(operation)
 
   res.status(200).send('Minecraft Server Started! You are now spending REAL MONEY! <br />' + 'The IP address of the Minecraft server is: ' + server_ip + ':25565<br />Your IP address is ' + callerip + '<br />A Firewall rule named ' + fwname + ' has been created for you.' );
 };
+
+exports.validateTemperature = async (req, res) => {
+  try {
+    if (req.body.temp < 100) {
+      res.status(200).send("Temperature OK");
+    } else {
+      res.status(200).send("Too hot");
+    }
+  } catch (error) {
+    //return an error
+    console.log("got error: ", error);
+    res.status(500).send(error);
+  }
+ };

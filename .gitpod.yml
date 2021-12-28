@@ -1,0 +1,7 @@
+image:
+  file: .gitpod.Dockerfile
+
+tasks:
+  - init: |
+      cd ./startupscript && npm install
+#    command: './cluster-scripts/prep-project.sh'

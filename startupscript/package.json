@@ -3,7 +3,7 @@
     "@google-cloud/compute": "^3.0.0",
     "@google-cloud/functions-framework": "^2.1.0"
   },
-  "name": "functions",
+  "name": "startupscript",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -13,8 +13,8 @@
   },
   "author": "",
   "license": "ISC",
-  "description": "",
   "devDependencies": {
     "nodemon": "^2.0.15"
-  }
-}  
+  },
+  "description": ""
+}

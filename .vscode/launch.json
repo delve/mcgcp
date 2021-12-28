@@ -5,32 +5,44 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Attach by Process ID",
-            "processId": "${command:PickProcess}",
-            "request": "attach",
+            "name": "Launch via NPM",
+            "request": "launch",
+            "runtimeArgs": [
+                "exec",
+                "node_modules/@google-cloud/functions-framework/build/src/index.js",
+                "--target=startInstance"
+            ],
+            "runtimeExecutable": "npm",
             "skipFiles": [
                 "<node_internals>/**"
             ],
             "type": "pwa-node"
         },
-
         {
-            "type": "pwa-node",
+            "name": "Launch Node Program",
+            "program": "/workspace/mcgcp/startupscript/index.js",
             "request": "launch",
-            "name": "Launch Program",
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${file}"
+            "type": "pwa-node"
         },
         {
-            "type": "pwa-node",
+            "name": "Debug StartInstance",
+            "type": "node",
+            "cwd": "${workspaceFolder}/startupscript",
+            //"port": 9449,
             "request": "launch",
-            "name": "Launch StartInstance",
-            "skipFiles": [
-                "<node_internals>/**"
+            "runtimeArgs": [
+                "exec",
+                "--inspect"],
+            "args": [
+                "--",
+                "node_modules/@google-cloud/functions-framework",
+                "--target=startInstance"
             ],
-            "program": "node_modules/@google-cloud/functions-framework --target=startInstance"
+            "runtimeExecutable": "npm",
+            "outputCapture": "std"
         }
     ]
 }
