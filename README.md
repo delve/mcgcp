@@ -25,9 +25,6 @@ to run localhost:8080 server with <target>
 curl -X POST http://localhost:8080 -H "Content-Type:application/json" -d '{\"temp\":\"50\"}'
 ```
 
-# interactive debugging how?
-
-
 
 # helpful
 node module repo

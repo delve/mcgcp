@@ -1,7 +1,8 @@
 {
   "dependencies": {
     "@google-cloud/compute": "^3.0.0",
-    "@google-cloud/functions-framework": "^2.1.0"
+    "@google-cloud/functions-framework": "^2.1.0",
+    "gcp-metadata": "^4.3.1"
   },
   "name": "startupscript",
   "version": "1.0.0",
