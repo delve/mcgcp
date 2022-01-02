@@ -79,7 +79,7 @@ async function createFirewallRule(callerip) {
   firewallRule.allowed = [
     {
       IPProtocol: 'tcp',
-      ports: ['25566'],
+      ports: ['25565'],
     },
   ];
   firewallRule.sourceRanges = [callerip + '/32']

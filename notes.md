@@ -63,10 +63,13 @@ crontab cron
     gcloud compute instances add-metadata INSTANCE_NAME [--metadata=KEY=VALUE,[KEY=VALUE,…]] [--metadata-from-file=KEY=LOCAL_FILE_PATH,[…]] [--zone=ZONE] [GCLOUD_WIDE_FLAG …]
 startup-script 
 #!/bin/bash
+sudo su
 mount /dev/disk/by-id/google-mc-1-world /home/minecraft
 (crontab -l ; echo "0 */4 * * * /home/minecraft/backup.sh")| crontab -
 cd /home/minecraft
-screen -d -m -S mcs java -Xms1G -Xmx7G -d64 -jar minecraft_server.1.18.jar nogui
+export JAVA_HOME=/opt/jdk-17
+export PATH=$PATH:$JAVA_HOME/bin 
+screen -d -m -S mcs java -Xms1G -Xmx7G -jar minecraft_server.1.18.jar nogui
 
 shutdown-script
 #!/bin/bash
@@ -82,3 +85,14 @@ deploy - https://codelabs.developers.google.com/codelabs/local-development-with-
 
 gcloud functions deploy startMcServer --trigger-http --runtime=nodejs16 --region=europe-west1
 gcloud alpha functions add-iam-policy-binding startMcServer --region=europe-west1 --member=allUsers --role=roles/cloudfunctions.invoker
+
+
+
+
+# You are here:
+nslookup goober.site
+passes
+nslookup latest1.kirbycraft.goober.site
+fails
+
+DERP
