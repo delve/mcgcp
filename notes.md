@@ -73,6 +73,12 @@ shutdown-script
 sudo screen -r -X stuff '/stop\n'
 
 
-# CREATE cloud functions from script files & package (HOW?)
+# CREATE cloud functions from script files & package
 https://cloud.google.com/sdk/gcloud/reference/functions/deploy
 deploy - https://codelabs.developers.google.com/codelabs/local-development-with-cloud-functions#5
+
+
+
+
+gcloud functions deploy startMcServer --trigger-http --runtime=nodejs16 --region=europe-west1
+gcloud alpha functions add-iam-policy-binding startMcServer --region=europe-west1 --member=allUsers --role=roles/cloudfunctions.invoker

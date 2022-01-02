@@ -6,9 +6,9 @@
     "configurations": [
 
         {
-            "name": "Debug StartInstance",
+            "name": "Debug startMcServer",
             "type": "node",
-            "cwd": "${workspaceFolder}/startupscript",
+            "cwd": "${workspaceFolder}/startMcServer",
             //"port": 9449,
             "request": "launch",
             "runtimeArgs": [
@@ -17,7 +17,7 @@
             "args": [
                 "--",
                 "node_modules/@google-cloud/functions-framework",
-                "--target=startInstance"
+                "--target=startMcServer"
             ],
             "runtimeExecutable": "npm",
             "outputCapture": "std"

@@ -3,5 +3,8 @@ image:
 
 tasks:
   - init: |
-      cd ./startupscript && npm install
+      cd ./startMcServer && npm install
 #    command: './cluster-scripts/prep-project.sh'
+  - command: |
+      gcloud init
+      gcloud auth application-default login

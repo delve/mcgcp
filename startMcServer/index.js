@@ -11,7 +11,7 @@ const zonename = 'europe-west1-b';
 const vmname = 'mc-1';
 const projectId = 'minecraft1-336511';
 const fwname = 'minecraft-fw-rule-' + Math.floor(new Date() / 1000);
-const dnsDomain = 'latest1.kirbycraft.goober.site'
+const dnsDomain = 'latest1.kirbycraft.goober.site.'
 const dnsZone = 'minecraft'
 const dnsRecordType = 'a'
 const dnsRecordTtl = '300'
@@ -34,43 +34,39 @@ async function get_server_ip() {
 }
 
 async function update_domain(server_ip) {
-  // gcloud beta dns --project=projectId record-sets transaction start --zone=dnsZone
-  // gcloud beta dns --project=projectId record-sets transaction add <server IP> --name=dnsDomain --ttl=dnsRecordTtl --type=dnsRecordType --zone=dnsZone
-  // gcloud beta dns --project=projectId record-sets transaction execute --zone=dnsZone
-
   const zone = dns.zone(dnsZone);
 
+  //get existing DNS A records
+  const query = {
+    name: dnsDomain,
+    type: 'A'
+  };
+  const records = await zone.getRecords(query);
+  const currentIp = records[0][0].data[0]
+
+  //create the change set
   const oldARecord = zone.record(dnsRecordType, {
     name: dnsDomain,
-    data: '34.79.179.110',
+    data: currentIp,
     ttl: dnsRecordTtl
   });
-
   const newARecord = zone.record(dnsRecordType, {
     name: dnsDomain,
     data: server_ip,
     ttl: dnsRecordTtl
   });
-
-  const config = {
+  const changeset = {
     add: newARecord,
     delete: oldARecord
   };
 
-  zone.createChange(config, (err, change, apiResponse) => {
-    if (!err) {
-      // The change was created successfully.
+  //execute the change
+  zone.createChange(changeset, (err, change, apiResponse) => {
+    if (err) {
+      // The change failed
+      console.log(err)
     }
   });
-
-  //-
-  // If the callback is omitted, we'll return a Promise.
-  //-
-  zone.createChange(config).then((data) => {
-    const change = data[0];
-    const apiResponse = data[1];
-  });
-  console.log(apiResponse)
 }
 
 async function createFirewallRule(callerip) {
@@ -99,7 +95,7 @@ async function createFirewallRule(callerip) {
   let operationName = operationState.name;
   // Wait for the create operation to complete.
   while (operationState.status !== 'DONE') {
-    clientResult = await operationsClient.wait({
+    clientResult = await operationsClient.wait({  
       operation: operationName,
       project: projectId,
     });
@@ -107,7 +103,7 @@ async function createFirewallRule(callerip) {
   }
 }
 
-exports.startInstance = async function startInstance(req, res) {
+exports.startMcServer = async function startMcServer(req, res) {
   console.log('Preparing to start instance ' + vmname);
   // Start the VM
   const instancesClient = new compute.InstancesClient();
