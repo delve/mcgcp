@@ -3,10 +3,10 @@ https://cloud.google.com/blog/products/it-ops/brick-by-brick-learn-gcp-by-settin
 https://www.cloudskillsboost.google/focuses/1852?parent=catalog
 ## create VM
 ```
-gcloud compute instances create mc-1 --project=minecraft1-336511 --zone=europe-west1-b --machine-type=n1-standard-1 --network-interface=address=34.79.179.110,network-tier=PREMIUM,subnet=default --maintenance-policy=MIGRATE --service-account=693447691230-compute@developer.gserviceaccount.com --scopes=https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/trace.append,https://www.googleapis.com/auth/devstorage.read_write --tags=minecratf-server --create-disk=auto-delete=yes,boot=yes,device-name=mc-1,image=projects/debian-cloud/global/images/debian-10-buster-v20211209,mode=rw,size=10,type=projects/minecraft1-336511/zones/europe-west1-b/diskTypes/pd-ssd --create-disk=device-name=mc-1-world,mode=rw,name=mc-1-world,size=50,type=projects/minecraft1-336511/zones/europe-west1-b/diskTypes/pd-ssd --no-shielded-secure-boot --shielded-vtpm --shielded-integrity-monitoring --reservation-affinity=any
+gcloud compute instances create mc-1 --project=minecraft1-336511 --zone=europe-west1-b --machine-type=n1-standard-1 --network-interface=network-tier=STANDARD,subnet=default --maintenance-policy=MIGRATE --service-account=693447691230-compute@developer.gserviceaccount.com --scopes=https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/trace.append,https://www.googleapis.com/auth/devstorage.read_write --tags=minecratf-server --create-disk=auto-delete=yes,boot=yes,device-name=mc-1,image=projects/debian-cloud/global/images/debian-10-buster-v20211209,mode=rw,size=10,type=projects/minecraft1-336511/zones/europe-west1-b/diskTypes/pd-ssd --create-disk=device-name=mc-1-world,mode=rw,name=mc-1-world,size=50,type=projects/minecraft1-336511/zones/europe-west1-b/diskTypes/pd-ssd --no-shielded-secure-boot --shielded-vtpm --shielded-integrity-monitoring --reservation-affinity=any
 ```
 
-# firewall rule
+# firewall rule - skip, handled by functions
 gcloud compute --project=minecraft1-336511 firewall-rules create minecraft-rule --direction=INGRESS --priority=1000 --network=default --action=ALLOW --rules=tcp:25565 --source-ranges=0.0.0.0/0 --target-tags=minecratf-server
 
 
@@ -73,6 +73,12 @@ shutdown-script
 sudo screen -r -X stuff '/stop\n'
 
 
-# CREATE cloud functions from script files & package (HOW?)
+# CREATE cloud functions from script files & package
 https://cloud.google.com/sdk/gcloud/reference/functions/deploy
 deploy - https://codelabs.developers.google.com/codelabs/local-development-with-cloud-functions#5
+
+
+
+
+gcloud functions deploy startMcServer --trigger-http --runtime=nodejs16 --region=europe-west1
+gcloud alpha functions add-iam-policy-binding startMcServer --region=europe-west1 --member=allUsers --role=roles/cloudfunctions.invoker
