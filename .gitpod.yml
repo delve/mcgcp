@@ -4,6 +4,8 @@ image:
 tasks:
   - init: |
       cd ./startMcServer && npm install
+      cd ./stopMcServer && npm install
+      cd ./inviteToMcServer && npm install
 #    command: './cluster-scripts/prep-project.sh'
   - command: |
       gcloud init
