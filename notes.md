@@ -87,12 +87,19 @@ gcloud functions deploy startMcServer --trigger-http --runtime=nodejs16 --region
 gcloud alpha functions add-iam-policy-binding startMcServer --region=europe-west1 --member=allUsers --role=roles/cloudfunctions.invoker
 
 
+gcloud functions deploy stopMcServer --trigger-http --runtime=nodejs16 --region=europe-west1
+gcloud alpha functions add-iam-policy-binding stopMcServer --region=europe-west1 --member=allUsers --role=roles/cloudfunctions.invoker
 
 
-# You are here:
+gcloud functions deploy inviteToMcServer --trigger-http --runtime=nodejs16 --region=europe-west1
+gcloud alpha functions add-iam-policy-binding inviteToMcServer --region=europe-west1 --member=allUsers --role=roles/cloudfunctions.invoker
+
+
+# top level TODOs:
+## fix DNS
 nslookup goober.site
 passes
 nslookup latest1.kirbycraft.goober.site
 fails
-
 DERP
+
