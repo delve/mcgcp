@@ -103,3 +103,11 @@ nslookup latest1.kirbycraft.goober.site
 fails
 DERP
 
+## what to do next
+preemptible VM
+
+FW rule management (pubsub add & cleanup? timeout?)
+
+curfew script?
+
+etc
