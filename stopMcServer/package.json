@@ -1,15 +1,15 @@
 {
   "dependencies": {
     "@google-cloud/compute": "^3.0.0",
-    "@google-cloud/dns": "^2.2.3",
-    "@google-cloud/functions-framework": "^2.1.0",
+    "@google-cloud/functions-framework": "^2.1.0"
   },
-  "name": "startMcServer",
+  "name": "stopMcServer",
   "version": "1.0.0",
   "main": "index.js",
   "author": "",
   "license": "MIT",
+  "description": "",
   "devDependencies": {
     "nodemon": "^2.0.15"
   }
-}
+}  

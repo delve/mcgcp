@@ -79,7 +79,7 @@ async function createFirewallRule(callerip) {
   firewallRule.allowed = [
     {
       IPProtocol: 'tcp',
-      ports: ['25566'],
+      ports: ['25565'],
     },
   ];
   firewallRule.sourceRanges = [callerip + '/32']
@@ -144,7 +144,7 @@ exports.startMcServer = async function startMcServer(req, res) {
   console.log('Firewall rule created for ' + callerip);
 
   //TODO: figure out how to poll the MC process for startup state (MC takes minutes to start as well)
-  res.status(200).send('Minecraft Server Started! You are now spending REAL MONEY! <br />' + 'The IP address of the Minecraft server is: ' + server_ip + ':25565<br />A Firewall rule named ' + fwname + ' has been created for your IP address: ' +  callerip);
+  res.status(200).send('Minecraft Server Started! You are now spending REAL MONEY! <br />' + 'The IP address of the Minecraft server is: ' + server_ip + ':25565<br />A Firewall rule named ' + fwname + ' has been created for your IP address: ' +  callerip + '<br /><img src=https://cataas.com/cat/computer/says/Have%20fun />');
 };
 
 // test functions
