@@ -82,15 +82,17 @@ deploy - https://codelabs.developers.google.com/codelabs/local-development-with-
 
 
 
-
+cd startMcServer
 gcloud functions deploy startMcServer --trigger-http --runtime=nodejs16 --region=europe-west1
 gcloud alpha functions add-iam-policy-binding startMcServer --region=europe-west1 --member=allUsers --role=roles/cloudfunctions.invoker
 
 
+cd stopMcServer
 gcloud functions deploy stopMcServer --trigger-http --runtime=nodejs16 --region=europe-west1
 gcloud alpha functions add-iam-policy-binding stopMcServer --region=europe-west1 --member=allUsers --role=roles/cloudfunctions.invoker
 
 
+cd inviteToMcServer
 gcloud functions deploy inviteToMcServer --trigger-http --runtime=nodejs16 --region=europe-west1
 gcloud alpha functions add-iam-policy-binding inviteToMcServer --region=europe-west1 --member=allUsers --role=roles/cloudfunctions.invoker
 

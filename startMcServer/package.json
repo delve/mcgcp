@@ -2,7 +2,7 @@
   "dependencies": {
     "@google-cloud/compute": "^3.0.0",
     "@google-cloud/dns": "^2.2.3",
-    "@google-cloud/functions-framework": "^2.1.0",
+    "@google-cloud/functions-framework": "^2.1.0"
   },
   "name": "startMcServer",
   "version": "1.0.0",
